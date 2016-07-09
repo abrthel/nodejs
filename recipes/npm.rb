@@ -28,7 +28,7 @@ else
 end
 
 execute 'Fix NPM permissions' do
-  environment ({ 'HOME' => "/home/#{node['nodejs']['npm']['user']}/",
+  environment ({ 'HOME' => "/home/#{node['nodejs']['npm']['user']}",
    'USER' => node['nodejs']['npm']['user'] })
   user node['nodejs']['npm']['user']
   group node['nodejs']['npm']['group']
@@ -40,7 +40,7 @@ execute 'Fix NPM permissions' do
     if [ -d "$HOME/#{node['nodejs']['npm']['prefix']}/bin" ] ; then
       PATH=$PATH:$HOME/#{node['nodejs']['npm']['prefix']}/bin
     fi
-    " >> ~/.bashrc
+    " >> $HOME/.bashrc
   EOH
   not_if { ::File.directory?(node['nodejs']['npm']['prefix']) }
 end
