@@ -37,8 +37,8 @@ execute 'Fix NPM permissions' do
     mkdir #{node['nodejs']['npm']['prefix']}
     npm config set prefix #{node['nodejs']['npm']['prefix']}
     echo "
-    if [ -d "$HOME/#{node['nodejs']['npm']['prefix']}/bin" ] ; then
-      PATH=$PATH:$HOME/#{node['nodejs']['npm']['prefix']}/bin
+    if [ -d "#{node['nodejs']['npm']['prefix']}/bin" ] ; then
+      PATH=$PATH:#{node['nodejs']['npm']['prefix']}/bin
     fi
     " >> $HOME/.bashrc
   EOH
