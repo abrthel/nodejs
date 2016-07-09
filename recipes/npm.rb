@@ -27,8 +27,9 @@ else
   Chef::Log.error('No install method found for npm')
 end
 
-execute 'move global npm folder to ~/npm' do
-  cwd "~/"
+execute 'Fix NPM permissions' do
+  environment ({ 'HOME' => "/home/#{node['nodejs']['npm']['user']}/}",
+   'USER' => node['nodejs']['npm']['user'] })
   user node['nodejs']['npm']['user']
   group node['nodejs']['npm']['group']
   action :run
@@ -36,10 +37,10 @@ execute 'move global npm folder to ~/npm' do
     mkdir #{node['nodejs']['npm']['prefix']}
     npm config set prefix #{node['nodejs']['npm']['prefix']}
     echo "
-    if [ -d "~/npm/bin" ] ; then
-      PATH=$PATH:~/npm/bin
+    if [ -d "$HOME/npm/bin" ] ; then
+      PATH=$PATH:$HOME/npm/bin
     fi
     " >> ~/.bashrc
   EOH
-  not_if { ::File.directory?(node['nodejs']['npm']['prefix']}}
+  not_if { ::File.directory?(node['nodejs']['npm']['prefix']) }
 end

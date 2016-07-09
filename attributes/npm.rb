@@ -3,4 +3,4 @@ default['nodejs']['npm']['version'] = 'latest'
 
 default['nodejs']['npm']['user'] = 'root'
 default['nodejs']['npm']['group'] = 'root'
-default['nodejs']['npm']['prefix'] = '~/npm'
+default['nodejs']['npm']['prefix'] = "/home/#{node['nodejs']['npm']['user']}/npm-global"
