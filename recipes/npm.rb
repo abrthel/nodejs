@@ -28,7 +28,7 @@ else
 end
 
 execute 'Fix NPM permissions' do
-  environment ({ 'HOME' => "/home/#{node['nodejs']['npm']['user']}/}",
+  environment ({ 'HOME' => "/home/#{node['nodejs']['npm']['user']}/",
    'USER' => node['nodejs']['npm']['user'] })
   user node['nodejs']['npm']['user']
   group node['nodejs']['npm']['group']
